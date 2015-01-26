@@ -84,6 +84,7 @@ class MailMerge(object):
         for zi in self.zip.filelist:
             if zi in self.parts:
                 xml = ElementTree.tostring(self.parts[zi].getroot())
+                xml = xml.replace('\r\n', '</w:t></w:r><w:r><w:br/><w:t>' )
                 output.writestr(zi.filename, xml)
             else:
                 output.writestr(zi.filename, self.zip.read(zi))
